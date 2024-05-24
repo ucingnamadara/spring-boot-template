@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
-
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "user")
@@ -20,20 +19,21 @@ import org.hibernate.annotations.GenericGenerator;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends AuditData{
-    @Id
-    @GenericGenerator(name = "user-uuid", strategy = "uuid2")
-    @GeneratedValue(generator = "user-uuid")
-    @Column(name = "id", length = 36, nullable = false, updatable = false, unique = true)
-    private String id;
+public class User extends AuditData {
 
-    @Column(name = "email", length = 100)
-    private String email;
+	@Id
+	@GenericGenerator(name = "user-uuid", strategy = "uuid2")
+	@GeneratedValue(generator = "user-uuid")
+	@Column(name = "id", length = 36, nullable = false, updatable = false, unique = true)
+	private String id;
 
-    @Column(name = "phoneNumber", length = 20)
-    private String phoneNumber;
+	@Column(name = "email", length = 100)
+	private String email;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+	@Column(name = "phoneNumber", length = 20)
+	private String phoneNumber;
+
+	@Column(name = "password", nullable = false)
+	private String password;
 
 }

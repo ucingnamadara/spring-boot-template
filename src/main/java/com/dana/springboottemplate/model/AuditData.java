@@ -19,21 +19,22 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AuditData {
 
-    @Column(name = "created_by")
-    private String createdBy;
+	@Column(name = "created_by")
+	private String createdBy;
 
-    @CreationTimestamp
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+	@CreationTimestamp
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 
-    @Column(name = "updated_by")
-    private String updatedBy;
+	@Column(name = "updated_by")
+	private String updatedBy;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+	@UpdateTimestamp
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
 
-    @Version
-    @Column(name = "version")
-    private Integer version;
+	@Version
+	@Column(name = "version")
+	private Integer version;
+
 }

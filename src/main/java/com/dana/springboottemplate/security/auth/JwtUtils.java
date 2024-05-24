@@ -22,9 +22,7 @@ public class JwtUtils {
 	@Value("${app.jwt.expiration-ms}")
 	private int jwtExpirationMs;
 
-	public String generateJwtToken(Authentication authentication) {
-
-		User userPrincipal = (User) authentication.getPrincipal();
+	public String generateJwtToken(User userPrincipal) {
 
 		return Jwts.builder()
 			.setSubject((userPrincipal.getId()))

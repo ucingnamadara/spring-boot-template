@@ -27,7 +27,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtUtils jwtUtils;
 
-
 	private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
 	@Override
@@ -41,8 +40,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 				Claims claims = jwtUtils.getClaimsFromJwtToken(jwt);
 				List<GrantedAuthority> authorities = getAuthorities(claims);
 
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						subject, null, authorities);
+				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(subject,
+						null, authorities);
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
 				SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -69,9 +68,10 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		Map<String, Object> authoritiesClaims = (Map<String, Object>) claims.get("authorities");
 		if (authoritiesClaims != null) {
-			authorities = authoritiesClaims.keySet().stream()
-					.map(SimpleGrantedAuthority::new)
-					.collect(Collectors.toList());
+			authorities = authoritiesClaims.keySet()
+				.stream()
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 		}
 		return authorities;
 	}

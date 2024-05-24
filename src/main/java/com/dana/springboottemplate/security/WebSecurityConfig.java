@@ -29,6 +29,9 @@ public class WebSecurityConfig {
 	@Autowired
 	private AuthEntryPointJwt unauthorizedHandler;
 
+	@Autowired
+	private UserDetailsService userDetailsService;
+
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter();
@@ -38,7 +41,7 @@ public class WebSecurityConfig {
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setUserDetailsService(userDetailsService);
 		authProvider.setPasswordEncoder(passwordEncoder());
 
 		return authProvider;
@@ -50,22 +53,12 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
-	public UserDetailsService userDetailsService(){
-		return new UserDetailsService() {
-			@Override
-			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-				return null;
-			}
-		};
-	}
-
-	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
-	@SuppressWarnings(value = {"deprecation", "removal"})
+	@SuppressWarnings(value = { "deprecation", "removal" })
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.cors()
 			.and()
